@@ -1,9 +1,9 @@
 import { SignUpForm } from "@/components";
 
-export default function SignUpPage() {
+export const SignUpPage = () => {
 	return (
 		<div className="w-full">
 			<SignUpForm />
 		</div>
 	);
-}
+};

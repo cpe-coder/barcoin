@@ -18,7 +18,7 @@ export default function Home() {
 					/>
 					<div className="flex gap-2 items-center text-black">
 						<p>Don&apos;t have account?</p>
-						<Link className="hover:text-blue-900" href={""}>
+						<Link className="hover:text-blue-900" href={"/SignUpPage"}>
 							Sign Up
 						</Link>
 					</div>
