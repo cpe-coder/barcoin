@@ -10,34 +10,24 @@ import {
 	FormControl,
 	FormField,
 	FormItem,
-	FormLabel,
 	FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
 
-const FormSchema = z
-	.object({
-		username: z.string().min(1, "Username is required").max(100),
-		email: z.string().min(1, "Email is required").email("Invalid email"),
-		password: z
-			.string()
-			.min(1, "Password is required")
-			.min(8, "Password must have than 8 characters"),
-		confirmPassword: z.string().min(1, "Password confirmation is required"),
-	})
-	.refine((data) => data.password === data.confirmPassword, {
-		path: ["confirmPassword"],
-		message: "Password do not match",
-	});
+const FormSchema = z.object({
+	email: z.string().min(1, "Email is required").email("Invalid email"),
+	password: z
+		.string()
+		.min(1, "Password is required")
+		.min(8, "Password must have than 8 characters"),
+});
 
 const SignUpForm = () => {
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
-			username: "",
 			email: "",
 			password: "",
-			confirmPassword: "",
 		},
 	});
 
@@ -48,28 +38,18 @@ const SignUpForm = () => {
 	return (
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
-				<div className="space-y-2">
-					<FormField
-						control={form.control}
-						name="username"
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>Username</FormLabel>
-								<FormControl>
-									<Input placeholder="johndoe" {...field} />
-								</FormControl>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
+				<div className="space-y-6">
 					<FormField
 						control={form.control}
 						name="email"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Email</FormLabel>
 								<FormControl>
-									<Input placeholder="mail@example.com" {...field} />
+									<Input
+										placeholder="Email address"
+										className=" text-black bg-amber-200 rounded-full w-80 border-black border active:outline-none focus:outline-none"
+										{...field}
+									/>
 								</FormControl>
 								<FormMessage />
 							</FormItem>
@@ -80,27 +60,10 @@ const SignUpForm = () => {
 						name="password"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Password</FormLabel>
 								<FormControl>
 									<Input
-										type="password"
-										placeholder="Enter your password"
-										{...field}
-									/>
-								</FormControl>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
-					<FormField
-						control={form.control}
-						name="confirmPassword"
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>Re-Enter your password</FormLabel>
-								<FormControl>
-									<Input
-										placeholder="Re-Enter your password"
+										placeholder="Password"
+										className=" rounded-full text-black bg-amber-200 w-80 border-black border active:outline-none focus:outline-none"
 										type="password"
 										{...field}
 									/>
@@ -110,19 +73,19 @@ const SignUpForm = () => {
 						)}
 					/>
 				</div>
-				<Button className="w-full mt-6" type="submit">
-					Sign up
+				<Button
+					className="w-full mt-8 py-2 bg-amber-300  hover:transition-all hover:duration-200 duration-200 transition-all  rounded-full hover:bg-amber-100 hover:cursor-pointer"
+					type="submit"
+				>
+					Sign Up
 				</Button>
 			</form>
-			<div className="mx-auto my-4 flex w-full items-center justify-evenly before:mr-4 before:block before:h-px before:flex-grow before:bg-stone-400 after:ml-4 after:block after:h-px after:flex-grow after:bg-stone-400">
-				or
-			</div>
-			<p className="text-center text-sm text-gray-600 mt-2">
-				If you don&apos;t have an account, please&nbsp;
-				<Link className="text-blue-500 hover:underline" href="/sign-in">
-					Sign in
+			<div className="flex gap-2 items-center text-black">
+				<p>Already have an account?</p>
+				<Link className="hover:text-blue-900" href={"/sign-in"}>
+					Sign In
 				</Link>
-			</p>
+			</div>
 		</Form>
 	);
 };

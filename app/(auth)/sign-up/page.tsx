@@ -1,6 +1,6 @@
 "use client";
 
-import SignUpForm from "@/components/form/SignInForm";
+import SignUpForm from "@/components/form/SignUpForm";
 
 export default function SignUpPage() {
 	return (
@@ -8,7 +8,9 @@ export default function SignUpPage() {
 			<title>Sign In</title>
 			<div className="w-full min-h-screen items-center flex justify-center bg-white/50">
 				<div className="flex flex-col items-center justify-center gap-4">
-					<h1 className="text-black font-normal text-5xl mb-8">Welcome Back</h1>
+					<h1 className="text-black font-normal text-5xl mb-8">
+						Create account
+					</h1>
 					<SignUpForm />
 				</div>
 			</div>
