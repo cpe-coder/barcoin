@@ -1,7 +1,9 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
+import React from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Button } from "../ui/button";
@@ -31,8 +33,14 @@ const SignUpForm = () => {
 		},
 	});
 
+	const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
+
 	const onSubmit = (values: z.infer<typeof FormSchema>) => {
 		console.log(values);
+	};
+
+	const handleClick = () => {
+		setIsPasswordVisible((prev) => !prev);
 	};
 
 	return (
@@ -64,8 +72,20 @@ const SignUpForm = () => {
 									<Input
 										placeholder="Password"
 										className=" rounded-full text-black bg-amber-200 w-80 border-black border active:outline-none focus:outline-none"
-										type="password"
+										type={isPasswordVisible ? "text" : "password"}
 										{...field}
+										passwordComponents={
+											<Button
+												onClick={handleClick}
+												className="bg-transparent border-0 hover:bg-transparent focus:bg-transparent hover:cursor-pointer"
+											>
+												{isPasswordVisible ? (
+													<EyeOff className="text-black" />
+												) : (
+													<Eye className="text-black" />
+												)}
+											</Button>
+										}
 									/>
 								</FormControl>
 								<FormMessage />
