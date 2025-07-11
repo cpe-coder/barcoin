@@ -36,7 +36,11 @@ const SignInForm = () => {
 	const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
 
 	const onSubmit = (values: z.infer<typeof FormSchema>) => {
-		console.log(values);
+		try {
+			console.log(values);
+		} catch (error) {
+			console.error("Error during sign in:", error);
+		}
 	};
 
 	const handleClick = () => {
