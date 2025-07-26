@@ -102,7 +102,7 @@ const SignUpForm = () => {
 			</form>
 			<div className="flex gap-2 items-center text-black">
 				<p>Already have an account?</p>
-				<Link className="hover:text-blue-900" href={"/admin/sign-in"}>
+				<Link className="hover:text-blue-900" href={"/auth/sign-in"}>
 					Sign In
 				</Link>
 			</div>

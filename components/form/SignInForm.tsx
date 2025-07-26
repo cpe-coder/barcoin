@@ -2,7 +2,9 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Eye, EyeOff } from "lucide-react";
+import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -25,6 +27,11 @@ const FormSchema = z.object({
 });
 
 const SignInForm = () => {
+	const session = useSession();
+	const [isLoading, setIsLoading] = React.useState(false);
+	const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
+	const router = useRouter();
+
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
@@ -33,13 +40,35 @@ const SignInForm = () => {
 		},
 	});
 
-	const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
+	React.useEffect(() => {
+		if (session.status === "authenticated") {
+			router.push("/");
+		}
+	}, [session, router]);
 
-	const onSubmit = (values: z.infer<typeof FormSchema>) => {
+	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+		setIsLoading(true);
+		const email = values.email;
+		const password = values.password;
 		try {
-			console.log(values);
+			const res = await signIn("credentials", {
+				redirect: false,
+				email,
+				password,
+			});
+
+			if (res?.ok) {
+				setIsLoading(false);
+				form.setValue("email", "");
+				form.setValue("password", "");
+			} else {
+				setIsLoading(false);
+				console.log("Invalid email or password");
+			}
 		} catch (error) {
-			console.error("Error during sign in:", error);
+			setIsLoading(false);
+
+			console.log("Something went wrong", error);
 		}
 	};
 
@@ -101,12 +130,12 @@ const SignInForm = () => {
 					className="w-full mt-8 py-2 bg-amber-300 hover:bg-amber-100 hover:transition-all hover:duration-200 duration-200 transition-all hover:cursor-pointer rounded-full"
 					type="submit"
 				>
-					Sign in
+					{isLoading ? "Submitting..." : "Sign In"}
 				</Button>
 			</form>
 			<div className="flex gap-2 items-center text-black">
 				<p>Don&apos;t have account?</p>
-				<Link className="hover:text-blue-900" href={"/admin/sign-up"}>
+				<Link className="hover:text-blue-900" href={"/auth/sign-up"}>
 					Sign Up
 				</Link>
 			</div>
