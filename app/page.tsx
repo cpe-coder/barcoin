@@ -14,7 +14,7 @@ export default function Home() {
 	useEffect(() => {
 		setIsLoading(true);
 		const timeoutId = setTimeout(() => {
-			router.push("/admin/sign-in");
+			router.push("/admin/history");
 			setIsLoading(false);
 		}, 2000);
 
