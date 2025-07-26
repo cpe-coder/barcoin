@@ -1,5 +1,7 @@
+"use client";
+
 import { ThemeProvider } from "@/components/theme-provider";
-import type { Metadata } from "next";
+import { SessionProvider } from "next-auth/react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -12,10 +14,6 @@ const geistMono = Geist_Mono({
 	variable: "--font-geist-mono",
 	subsets: ["latin"],
 });
-
-export const metadata: Metadata = {
-	title: "Barcoin",
-};
 
 export default function RootLayout({
 	children,
@@ -33,7 +31,7 @@ export default function RootLayout({
 					enableSystem
 					disableTransitionOnChange
 				>
-					{children}
+					<SessionProvider>{children}</SessionProvider>
 				</ThemeProvider>
 			</body>
 		</html>
