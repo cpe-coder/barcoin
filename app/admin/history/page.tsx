@@ -14,17 +14,19 @@ export default function HistoryPage() {
 
 			<div className="w-full max-w-[1280px] overflow-x-auto mx-auto px-4 md:px-8 lg:px-8">
 				<Table className="w-full">
-					<TableHeader>
+					<TableHeader className="">
 						<TableRow>
-							<TableHead className="w-[100px]">Date</TableHead>
-							<TableHead>PHP</TableHead>
-							<TableHead>Status</TableHead>
+							<TableHead className="w-[120px]">Date</TableHead>
+							<TableHead className="">PHP</TableHead>
+							<TableHead className="">Status</TableHead>
 							<TableHead className="text-right">Action</TableHead>
 						</TableRow>
 					</TableHeader>
 					<TableBody>
 						<TableRow>
-							<TableCell className="font-medium">April 22, 2025</TableCell>
+							<TableCell className="font-medium w-[120px]">
+								April 22, 2025
+							</TableCell>
 							<TableCell>50,000</TableCell>
 							<TableCell>Completed</TableCell>
 							<TableCell className="text-right">
@@ -34,7 +36,9 @@ export default function HistoryPage() {
 							</TableCell>
 						</TableRow>
 						<TableRow>
-							<TableCell className="font-medium">April 20, 2025</TableCell>
+							<TableCell className="font-medium w-[120px]">
+								April 20, 2025
+							</TableCell>
 							<TableCell>30,000</TableCell>
 							<TableCell>Completed</TableCell>
 							<TableCell className="text-right">
@@ -44,7 +48,9 @@ export default function HistoryPage() {
 							</TableCell>
 						</TableRow>
 						<TableRow>
-							<TableCell className="font-medium">April 18, 2025</TableCell>
+							<TableCell className="font-medium w-[120px]">
+								April 18, 2025
+							</TableCell>
 							<TableCell>10,000</TableCell>
 							<TableCell>Completed</TableCell>
 							<TableCell className="text-right">
