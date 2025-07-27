@@ -1,5 +1,7 @@
 "use client";
 
+import Navbar from "@/components/navbar";
+import { LoaderIcon } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FC } from "react";
@@ -14,8 +16,8 @@ const AuthLayout: FC<AuthLayoutProps> = ({ children }) => {
 
 	if (session.status === "loading") {
 		return (
-			<div className="bg-white flex items-center justify-center">
-				<h1 className="text-black">Loading...</h1>
+			<div className="bg-amber-50 flex w-full h-screen items-center justify-center">
+				<LoaderIcon color="gray" size={70} className="animate-spin" />
 			</div>
 		);
 	}
@@ -24,7 +26,12 @@ const AuthLayout: FC<AuthLayoutProps> = ({ children }) => {
 		router.push("/auth/signin");
 	}
 
-	return <div>{children}</div>;
+	return (
+		<div>
+			<Navbar />
+			{children}
+		</div>
+	);
 };
 
 export default AuthLayout;
