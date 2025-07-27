@@ -3,6 +3,7 @@
 import { ThemeProvider } from "@/components/theme-provider";
 import { SessionProvider } from "next-auth/react";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -31,7 +32,10 @@ export default function RootLayout({
 					enableSystem
 					disableTransitionOnChange
 				>
-					<SessionProvider>{children}</SessionProvider>
+					<SessionProvider>
+						{children}
+						<Toaster position="bottom-right" richColors={true} theme="light" />
+					</SessionProvider>
 				</ThemeProvider>
 			</body>
 		</html>

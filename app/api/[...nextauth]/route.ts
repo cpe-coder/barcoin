@@ -59,6 +59,6 @@ const handler = NextAuth({
 	pages: {
 		signIn: "/sign-in",
 	},
-	secret: process.env.MEXTAUTH_SECRET,
+	secret: process.env.NEXTAUTH_SECRET,
 });
 export { handler as GET, handler as POST };
